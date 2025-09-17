@@ -1,0 +1,39 @@
+# Gamdb00p Dumper
+Works with:
+- **F.E.A.R.**
+- **S2 SonSilah**
+- **D187**
+
+
+This tool lets you extract and analyze the internal database structures used by these games and you can use GDBEdit** to rebuild database.
+
+
+---
+
+## ✨ Features
+
+- Dumps `.Gamdb00p` files to GDBEdit** style schema,record,struct based source
+- Supports:
+  - **RecordLinks**
+  - **Struct types**
+  - Schema generation (compatible with **GDBEdit**)
+  - Outputs to \Output\ Folder
+  
+  ⚠️ **Note:**  
+This tool does **not** create `.Gamdb00s` files.
+
+
+## 🛠 Requirements
+
+- F.E.A.R SDK 
+- `GameDataBase.dll` from the **F.E.A.R. SDK** 
+- Windows  
+- C++ build environment (Visual Studio, MinGW, etc.)
+
+
+
+⚖️ Disclaimer
+
+This is a fan-made research tool.
+I am not affiliated with Monolith, Vivendi, or any other rights holders.
+Use at your own risk.

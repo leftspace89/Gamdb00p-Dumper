@@ -1,0 +1,53 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.db
+*.opendb
+*.ipch
+*.ipdb
+*.iobj
+*.db-wal
+*.db-shm
+*.rar
+*.rar
+.vs/
+*.id0
+*.id1
+*.id2
+*.nam
+*.til
+*.i64
+
+
+/Release
+WorkingSample.cpp
+S2_ModdingTools.vcxproj.filters
