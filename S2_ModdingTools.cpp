@@ -297,23 +297,37 @@ void DumpDatabaseRecursive(HDATABASE hDB, const std::filesystem::path& outRoot) 
 							case eAttributeType_Vector3: schemaIni << "Type=Vector3\nDefault=\n"; break;
 							case eAttributeType_Vector4: schemaIni << "Type=Vector4\nDefault=\n"; break;
 							case eAttributeType_RecordLink:
+							{
 								schemaIni << "Type=RecordLink\nDefault=<none>\n";
-								{
 
-									std::string linkSchema;
-									if (numVals > 0) {
-										HRECORD hLink = g_pLTDatabase->GetRecordLink(hAttr, 0, nullptr);
+								
+								std::string linkSchema;
+								for (uint32 ri2 = 0; ri2 < numRecords && linkSchema.empty(); ++ri2) {
+									HRECORD hRec2 = g_pLTDatabase->GetRecordByIndex(hCat, ri2);
+									if (!hRec2) continue;
+
+									HATTRIBUTE hAttr2 = g_pLTDatabase->GetAttribute(hRec2, attrName.c_str());
+									if (!hAttr2) continue;
+
+									uint32 vals = g_pLTDatabase->GetNumValues(hAttr2);
+									for (uint32 vi2 = 0; vi2 < vals; ++vi2) {
+										HRECORD hLink = g_pLTDatabase->GetRecordLink(hAttr2, vi2, nullptr);
 										if (hLink) {
 											HCATEGORY hLinkCat = g_pLTDatabase->GetRecordParent(hLink);
-											if (hLinkCat) {
-												linkSchema = g_pLTDatabase->GetCategoryName(hLinkCat);
-												std::replace(linkSchema.begin(), linkSchema.end(), '/', '.');
-											}
+											std::string linkCatName = g_pLTDatabase->GetCategoryName(hLinkCat);
+											std::replace(linkCatName.begin(), linkCatName.end(), '/', '.');
+											linkSchema = linkCatName; 
+											break;
 										}
 									}
-									schemaIni << "Data=" << (linkSchema.empty() ? "" : linkSchema) << "\n";
 								}
+
+								if (!linkSchema.empty())
+									schemaIni << "Data=" << linkSchema << "\n";
+								else
+									schemaIni << "Data=\n";
 								break;
+							}
 							default: schemaIni << "Type=Unknown\nDefault=\n"; break;
 							}
 							schemaIni << "Inherit=True\nDeleted=False\n";
